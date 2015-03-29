@@ -24,12 +24,14 @@ public class CommandCenter extends JFrame implements KeyListener, ActionListener
 	private Process proc;
 	private Entity leftPaddle;
 	private Entity rightPaddle;
+	private HttpMirror http;
+	public String player1=null;
+	public String player2=null;
 	
 	public CommandCenter(GameEngine ge)
 	{
 		super("Command Center");
 		this.ge=ge;
-		//this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		JButton connect=new JButton("Connect");
 		connect.addActionListener(this);
 		Container c=this.getContentPane();
@@ -47,6 +49,68 @@ public class CommandCenter extends JFrame implements KeyListener, ActionListener
 					rightPaddle=e;
 			}
 		}
+		http=new HttpMirror(this);
+		http.start();
+	}
+	
+	public int addPlayer(String id)
+	{
+		if(player1==null)
+		{
+			System.out.println("player 1 connected! "+id);
+			player1=id;
+			return(1);
+		}
+		else if(!player1.equals(id)&&player2==null)
+		{
+			System.out.println("player 2 connected! "+id);
+			player2=id;
+			return(2);
+		}
+		return(-1);
+	}
+	
+	public void movePlayer(String ip, String direction)
+	{
+		direction=direction.trim();
+		System.out.println("player: "+ip);
+		if(player1!=null&&player1.equals(ip))
+		{
+			System.out.println("player1 tried to move!");
+			//System.out.println("direction:"+direction);
+			if(direction.equals("up"))
+				leftPaddleMove(-1);
+			else if(direction.equals("down"))
+				leftPaddleMove(1);
+		}
+		else if(player2!=null&&player2.equals(ip))
+		{
+			System.out.println("player2 tried to move!");
+			if(direction.equals("up"))
+				rightPaddleMove(-1);
+			else if(direction.equals("down"))
+				rightPaddleMove(1);
+		}
+	}
+	
+	public void leftPaddleMove(int delta)
+	{
+		if(delta<0)
+		if(leftPaddle.getY()>0)
+			leftPaddle.setY(leftPaddle.getY()-1);
+		if(delta>0)
+		if(leftPaddle.getY()+leftPaddle.getHeight()<ge.lb.getHeight())
+			leftPaddle.setY(leftPaddle.getY()+1);
+	}
+	
+	public void rightPaddleMove(int delta)
+	{
+		if(delta<0)
+		if(rightPaddle.getY()>0)
+			rightPaddle.setY(rightPaddle.getY()-1);
+		if(delta>0)
+		if(rightPaddle.getY()+rightPaddle.getHeight()<ge.lb.getHeight())
+			rightPaddle.setY(rightPaddle.getY()+1);
 	}
 	
 	@Override
@@ -55,24 +119,20 @@ public class CommandCenter extends JFrame implements KeyListener, ActionListener
 		System.out.println("event! "+event);
 		if(event.getKeyCode()==KeyEvent.VK_UP)
 		{
-			if(rightPaddle.getY()>0)
-				rightPaddle.setY(rightPaddle.getY()-1);
+			rightPaddleMove(-1);
 		}
 		if(event.getKeyCode()==KeyEvent.VK_DOWN)
 		{
-			if(rightPaddle.getY()+rightPaddle.getHeight()<ge.lb.getHeight())
-				rightPaddle.setY(rightPaddle.getY()+1);
+			rightPaddleMove(1);
 		}
 		
 		if(event.getKeyCode()==KeyEvent.VK_W)
 		{
-			if(leftPaddle.getY()>0)
-				leftPaddle.setY(leftPaddle.getY()-1);
+			leftPaddleMove(-1);
 		}
 		if(event.getKeyCode()==KeyEvent.VK_S)
 		{
-			if(leftPaddle.getY()+leftPaddle.getHeight()<ge.lb.getHeight())
-				leftPaddle.setY(leftPaddle.getY()+1);
+			leftPaddleMove(1);
 		}
 	}
 
