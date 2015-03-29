@@ -23,31 +23,60 @@
 		    box-sizing: border-box;
 		    margin: 0px;
 		    padding: 0px;
+		    moz-appearance: none !important;
 		}
 	</style>
  	<script type="text/javascript">
- 		var player=0;
+ 		var player=-1;
  		function goUp()
  		{
  			$.get(
-   				 "http://75.102.67.252:9400",
+   				 "http://130.203.171.240:9400",
   				  {player: player, direction : "up"},function(data)//a fn that takes data as a param and responds from server...maybe
   			  							{
   			  								//alert(data);
   			  								if(data!="")
+  			  								{
   			  									player=data;
+  			  									var butup=document.getElementById("up");
+  			  									var butdown=document.getElementById("down");
+  			  									if(player==1)
+  			  									{
+  			  										butup.style["background-color"]="cyan";
+  			  										butdown.style["background-color"]="cyan";
+  			  									}
+  			  									else if(player==2)
+  			  									{
+  			  										butup.style["background-color"]="magenta";
+  			  										butdown.style["background-color"]="magenta";
+  			  									}
+  			  								}
   			  							}
 				 );
  		}
  		function goDown()
  		{
  			$.get(
-   				 "http://75.102.67.252:9400",
+   				 "http://130.203.171.240:9400",
   				  {player: player, direction : "down"},function(data)//a fn that takes data as a param and responds from server...maybe
   			  							{
   			  								//alert(data);
   			  								if(data!="")
+  			  								{
   			  									player=data;
+			  									var butup=document.getElementById("up");
+			  									var butdown=document.getElementById("down");
+			  									if(player==1)
+  			  									{
+  			  										butup.style["background-color"]="cyan";
+  			  										butdown.style["background-color"]="cyan";
+  			  									}
+  			  									else if(player==2)
+  			  									{
+  			  										butup.style["background-color"]="magenta";
+  			  										butdown.style["background-color"]="magenta";
+  			  									}
+		  									}
   			  							}
 				 );
  		}

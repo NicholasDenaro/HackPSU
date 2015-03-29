@@ -53,18 +53,18 @@ public class CommandCenter extends JFrame implements KeyListener, ActionListener
 		http.start();
 	}
 	
-	public int addPlayer(String id)
+	public int addPlayer()
 	{
 		if(player1==null)
 		{
-			System.out.println("player 1 connected! "+id);
-			player1=id;
+			System.out.println("player 1 connected! ");
+			player1="1";
 			return(1);
 		}
-		else if(!player1.equals(id)&&player2==null)
+		else if(player2==null)
 		{
-			System.out.println("player 2 connected! "+id);
-			player2=id;
+			System.out.println("player 2 connected! ");
+			player2="2";
 			return(2);
 		}
 		return(-1);
@@ -73,7 +73,9 @@ public class CommandCenter extends JFrame implements KeyListener, ActionListener
 	public void movePlayer(String ip, String direction)
 	{
 		direction=direction.trim();
-		System.out.println("player: "+ip);
+		System.out.println("player to move: "+ip);
+		System.out.println("\tplayer1:"+player1);
+		System.out.println("\tplayer2:"+player2);
 		if(player1!=null&&player1.equals(ip))
 		{
 			System.out.println("player1 tried to move!");

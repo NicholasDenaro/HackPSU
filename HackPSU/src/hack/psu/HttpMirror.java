@@ -95,7 +95,7 @@ public class HttpMirror extends Thread
 	        	  //System.out.println("GET:"+line);
 	        	  if(line.trim().equals("GET / HTTP/1.1"))
 	        	  {
-	        		  System.out.println("Serving page!!!");
+	        		  //System.out.println("Serving page!!!");
 	        		  servePage();
 	        	  }
 	        	  else
@@ -124,11 +124,12 @@ public class HttpMirror extends Thread
 	          }
 	        }
 	        
-	        //System.out.println("host: "+host);
+	        //System.out.println("player: "+player);
 	        //System.out.println("direction: "+direction);
-	        if(player!=""&&movement&&host!=null)
+	        if(player!=null&&player.equals("-")&&movement/*&&host!=null*/)
 	        {
-	        	int retval=center.addPlayer(player);
+	        	int retval=center.addPlayer();
+	        	//System.out.println("retval: "+retval);
 		        if(retval!=-1)
 		        {
 		        	System.out.println("sending...");
@@ -144,11 +145,13 @@ public class HttpMirror extends Thread
 		        	out.print("\r\n");
 		        	out.flush();
 		        }
-		        if(direction!=null)
-		        	center.movePlayer(player,direction);
+		        //if(direction!=null)
+		        	//center.movePlayer(player,direction);
 	        }
+	        if(direction!=null)
+	        	center.movePlayer(player,direction);
 	
-	        System.out.println("-______________________________-");
+	        //System.out.println("-______________________________-");
 	        // Close socket, breaking the connection to the client, and
 	        // closing the input and output streams
 	        out.close(); // Flush and close the output stream

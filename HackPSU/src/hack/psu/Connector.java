@@ -88,7 +88,7 @@ public class Connector extends Thread
 			}
 		}
 		
-		System.out.println("lights length: "+buff.length);
+		//System.out.println("lights length: "+buff.length);
 		
 		//this works, I think?
 		/*for (int i = 0; i < buff.length; i++)
