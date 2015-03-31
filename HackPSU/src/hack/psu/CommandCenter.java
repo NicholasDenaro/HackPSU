@@ -76,7 +76,7 @@ public class CommandCenter extends JFrame implements KeyListener, ActionListener
 				canvas.repaint();
 			}
 			
-		}, 500, 500);
+		}, 500, 100);
 
 		
 		canvas=new JPanel()
@@ -222,7 +222,7 @@ public class CommandCenter extends JFrame implements KeyListener, ActionListener
 						//Process proc;
 						try {
 							//proc = Runtime.getRuntime().exec("C:/Users/Nick/Desktop/workspaceHACKPSU/HackPSU/bin/lights.exe");
-							proc=Runtime.getRuntime().exec(path);
+							proc=Runtime.getRuntime().exec(path+" "+(ge.lb.getWidth()*ge.lb.getHeight()));
 							System.out.println("alive? "+proc.isAlive());
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
