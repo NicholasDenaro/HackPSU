@@ -10,7 +10,7 @@ import java.nio.ByteBuffer;
 public class Connector extends Thread
 {
 	private OutputStream out;
-	private ByteBuffer buffer;
+	public ByteBuffer buffer;
 	
 	@Override
 	public void run()

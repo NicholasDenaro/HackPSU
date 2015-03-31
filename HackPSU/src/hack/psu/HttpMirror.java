@@ -107,14 +107,6 @@ public class HttpMirror extends Thread
 	        		  line=line.substring(line.indexOf("=")+1);
 	        		  direction=line.substring(0,line.indexOf(" "));
 	        		  movement=true;
-		        	  /*line=line.substring(6);
-		        	  String get=line.substring(0, line.indexOf("="));
-		        	  if(get.equals("direction"))
-		        	  {
-		        		  movement=true;
-		        		  line=line.substring(line.indexOf("=")+1);
-		        		  direction=line.substring(0, line.indexOf(" "));
-		        	  }*/
 	        	  }
 	          }
 	          if(line.substring(0,4).equals("Host"))
@@ -196,12 +188,8 @@ public class HttpMirror extends Thread
 		
 		header+=new String(buf.toByteArray()/*,"UTF-8"*/);
 		
-		//header+="\r\n";
-		//header+="\r\n";
 		
 		buf.close();
-		//out.write(buf.toByteArray());
-		//out.write(header.getBytes());
 		out.write(header);
 		out.flush();
 		out.close();

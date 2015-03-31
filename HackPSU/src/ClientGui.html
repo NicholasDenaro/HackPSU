@@ -31,7 +31,7 @@
  		function goUp()
  		{
  			$.get(
-   				 "http://130.203.171.240:9400",
+   				 document.URL,
   				  {player: player, direction : "up"},function(data)//a fn that takes data as a param and responds from server...maybe
   			  							{
   			  								//alert(data);
@@ -57,7 +57,7 @@
  		function goDown()
  		{
  			$.get(
-   				 "http://130.203.171.240:9400",
+   				 document.URL,//"http://130.203.171.240:9400",
   				  {player: player, direction : "down"},function(data)//a fn that takes data as a param and responds from server...maybe
   			  							{
   			  								//alert(data);
